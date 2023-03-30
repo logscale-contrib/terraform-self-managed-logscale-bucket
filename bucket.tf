@@ -35,7 +35,7 @@ module "gcs_buckets" {
   version = "~> 3.4"
 
   project_id = var.project_id
-  name       = [format("%s-%s-%s", var.project_id, var.namespace, var.sa)]
+  name       = format("%s-%s-%s", var.project_id, var.namespace, var.sa)
   location   = var.region
 
   versioning = true
