@@ -40,7 +40,9 @@ module "gcs_buckets" {
   versioning = {
     first = true
   }
-  bucket_admins = {
-    wi = module.bucket_sa.iam_email
-  }
+
+  iam_members = [{
+    role   = "roles/storage.objectAdmin"
+    member = module.bucket_sa.iam_email
+  }]
 }
