@@ -41,6 +41,6 @@ module "gcs_buckets" {
     first = true
   }
   bucket_admins = {
-    ls = module.bucket_sa.email
+    ls = module.bucket_sa.service_account.name
   }
 }
