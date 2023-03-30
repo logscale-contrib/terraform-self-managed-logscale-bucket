@@ -25,6 +25,11 @@ module "iam" {
   }
 }
 
+resource "google_service_account_key" "service_account" {
+  service_account_id = module.bucket_sa.service_account.name
+  public_key_type    = "TYPE_X509_PEM_FILE"
+}
+
 module "gcs_buckets" {
   source          = "terraform-google-modules/cloud-storage/google"
   version         = "~> 3.4"
