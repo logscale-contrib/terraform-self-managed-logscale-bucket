@@ -31,16 +31,14 @@ resource "google_service_account_key" "service_account" {
 }
 
 module "gcs_buckets" {
-  source          = "terraform-google-modules/cloud-storage/google"
-  version         = "~> 3.4"
-  project_id      = var.project_id
-  names           = [format("%s-%s", var.namespace, var.sa)]
-  prefix          = var.cluster_name
-  set_admin_roles = true
-  versioning = {
-    first = true
-  }
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 3.4"
 
+  project_id = var.project_id
+  name       = [format("%s-%s-%s", var.project_id, var.namespace, var.sa)]
+  location   = var.region
+
+  versioning = true
   iam_members = [{
     role   = "roles/storage.objectAdmin"
     member = module.bucket_sa.iam_email
