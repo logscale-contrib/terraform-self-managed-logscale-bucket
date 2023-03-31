@@ -6,7 +6,6 @@ module "bucket_sa" {
   names        = [var.namespace]
   display_name = var.cluster_name
   description  = var.cluster_name
-  location = var.region
 }
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
