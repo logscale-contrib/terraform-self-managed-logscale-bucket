@@ -3,9 +3,10 @@ module "bucket_sa" {
   version      = "~> 4.0"
   project_id   = var.project_id
   prefix       = var.cluster_name
-  names        = [format("%s-%s", var.namespace, var.sa)]
+  names        = [var.namespace)]
   display_name = var.cluster_name
   description  = var.cluster_name
+  location = var.region
 }
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
