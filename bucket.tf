@@ -34,6 +34,7 @@ module "gcs_buckets" {
   source          = "terraform-google-modules/cloud-storage/google"
   version         = "~> 3.4"
   project_id      = var.project_id
+  location        = var.region
   names           = [format("%s-%s", var.namespace, var.sa)]
   prefix          = var.cluster_name
   set_admin_roles = true
