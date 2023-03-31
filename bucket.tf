@@ -3,7 +3,7 @@ module "bucket_sa" {
   version      = "~> 4.0"
   project_id   = var.project_id
   prefix       = var.cluster_name
-  names        = [var.namespace)]
+  names        = [var.namespace]
   display_name = var.cluster_name
   description  = var.cluster_name
   location = var.region
