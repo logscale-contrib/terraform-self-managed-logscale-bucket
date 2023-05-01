@@ -12,11 +12,11 @@ variable "region" {
 }
 
 variable "namespace" {
-  type = string
+  type        = string
   description = "(optional) describe your variable"
 }
 
 variable "sa" {
-  type = string
+  type        = string
   description = "(optional) describe your variable"
 }
