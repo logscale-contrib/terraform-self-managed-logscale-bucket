@@ -7,27 +7,12 @@ module "bucket_sa" {
   display_name = var.cluster_name
   description  = var.cluster_name
 }
-module "iam" {
-  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
-  version = "7.5.0"
-
-  project = var.project_id
-
-  service_accounts = [
-    module.bucket_sa.email
-  ]
-  mode = "authoritative"
-
-  bindings = {
-    "roles/iam.workloadIdentityUser" = [
-      format("serviceAccount:%s.svc.id.goog[%s/%s]", var.project_id, var.namespace, var.sa)
-    ]
-  }
-}
-
-resource "google_service_account_key" "service_account" {
-  service_account_id = module.bucket_sa.service_account.name
-  public_key_type    = "TYPE_X509_PEM_FILE"
+module "wi" {
+  source     = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  name       = var.sa
+  namespace  = var.namespace
+  project_id = var.project_id
+  roles      = ["roles/storage.admin", "roles/compute.admin"]
 }
 
 module "gcs_buckets" {
@@ -42,6 +27,6 @@ module "gcs_buckets" {
     first = true
   }
   bucket_admins = {
-    ls = module.bucket_sa.service_account.name
+    ls = module.wi.gcp_service_account
   }
 }
