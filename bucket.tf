@@ -29,4 +29,5 @@ module "gcs_buckets" {
   bucket_admins = {
     ls = module.wi.gcp_service_account_name
   }
+  force_destroy = true
 }
