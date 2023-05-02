@@ -27,6 +27,6 @@ module "gcs_buckets" {
     first = true
   }
   bucket_admins = {
-    ls = module.wi.gcp_service_account
+    ls = module.wi.gcp_service_account_name
   }
 }
