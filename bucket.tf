@@ -1,12 +1,4 @@
-module "bucket_sa" {
-  source       = "terraform-google-modules/service-accounts/google"
-  version      = "~> 4.0"
-  project_id   = var.project_id
-  prefix       = var.cluster_name
-  names        = [var.namespace]
-  display_name = var.cluster_name
-  description  = var.cluster_name
-}
+
 module "wi" {
   source     = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
   name       = var.sa
